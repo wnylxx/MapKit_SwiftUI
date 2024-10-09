@@ -6,19 +6,21 @@
 //
 
 import SwiftUI
+import MapKit
 
 struct ContentView: View {
+    @State private var position = MapCameraPosition.automatic
+    @State private var isSheetPresented: Bool = false
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
-        }
-        .padding()
+        Map(position: $position)
+            .ignoresSafeArea()
+            .sheet(isPresented: $isSheetPresented) {
+                SheetView()
+            }
     }
 }
 
-#Preview {
-    ContentView()
-}
+//#Preview {
+//    ContentView()
+//}
