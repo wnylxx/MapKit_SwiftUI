@@ -6,70 +6,75 @@
 //
 
 import SwiftUI
+import CoreLocation
+
+struct SearchResult: Identifiable {
+    let name: String
+    let title: String
+    let id: UUID
+    let coordinate: CLLocationCoordinate2D
+    
+    init(name: String, title: String, id: UUID, coordinate: CLLocationCoordinate2D) {
+        self.name = name
+        self.title = title
+        self.id = id
+        self.coordinate = coordinate
+    }
+    
+}
 
 struct SheetView: View {
-    @State private var locationService = LocationService(completer: .init())
-    @State private var search: String = ""
+    let textFieldPlaceHolder: String
+    @Binding var search: String
+    @Binding var selectedPresentationDetent: PresentationDetent
+    let results: [SearchResult]
+    let didSelectResult: (SearchResult) -> Void
     
-    @Binding var searchResults: [SearchResult]
+    @FocusState private var isTextFieldFocused: Bool
+    
+    //    @State private var locationService = LocationService(completer: .init())
+    //    @State private var search: String = ""
+    
+    //    @Binding var searchResults: [SearchResult]
     
     var body: some View {
-        VStack{
+        VStack {
             HStack{
                 Image(systemName: "magnifyingglass")
-                TextField("Search for a restaurant", text: $search)
-                    .autocorrectionDisabled()
-                    .onSubmit {
-                        Task {
-                            searchResults = (try? await locationService.search(with: search)) ?? []
-                        }
-                    }
+                TextField(textFieldPlaceHolder, text: $search)
+                    .focused($isTextFieldFocused)
             }
             .modifier(TextFieldGrayBackgroundColor())
             
-            Spacer()
-            
-            List {
-                ForEach(locationService.completions) { completion in
-                    Button(action: {didTapOnCompletion(completion)} ) {
-                        VStack(alignment: .leading, spacing: 4) {
-                            Text(completion.title)
-                                .font(.headline)
-                                .fontDesign(.rounded)
-                            Text(completion.subTitle)
-                            if let url = completion.url {
-                                Link(url.absoluteString, destination: url)
-                                    .lineLimit(1)
+            if results.isEmpty {
+                ContentUnavailableView("Get started by searching for a restaurant", systemImage: "fork.knife")
+            } else {
+                List {
+                    ForEach(results) { result in
+                        Button(action: {isTextFieldFocused = false; didSelectResult(result) }) {
+                            VStack(alignment: .leading, spacing: 8){
+                                Text(result.name)
+                                    .font(.headline)
+                                Text(result.title)
                             }
                         }
+                        .listRowBackground(Color.clear)
+                        .foregroundStyle(.primary)
                     }
-                    .listRowBackground(Color.clear)
-                    
                 }
+                .listStyle(.plain)
+                .scrollContentBackground(.hidden)
             }
-            .listStyle(.plain)
-            .scrollContentBackground(.hidden)
             
+            Spacer()
         }
-        .onChange(of: search) {
-            locationService.update(queryFragment: search)
-        }
+        .onChange(of: isTextFieldFocused) { selectedPresentationDetent = isTextFieldFocused ? .large : .height(300) }
         .padding()
-        // 아래로 내려서 dismiss 못하게 설정
-        .interactiveDismissDisabled()
-        .presentationDetents([.height(400), .large])
-        // blur 효과 주기
+        .presentationDetents([.height(200), .large], selection: $selectedPresentationDetent)
         .presentationBackground(.regularMaterial)
         .presentationBackgroundInteraction(.enabled(upThrough: .large))
+        .interactiveDismissDisabled()
         
-    }
-    
-    private func didTapOnCompletion(_ completion: SearchCompletions) {
-        Task {
-            if let singleLocation = try? await locationService.search(with: "\(completion.title) \(completion.subTitle)").first {
-                searchResults = [singleLocation]
-            }
-        }
     }
 }
 

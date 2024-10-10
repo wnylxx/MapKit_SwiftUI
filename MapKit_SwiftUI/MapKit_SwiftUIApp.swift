@@ -11,7 +11,9 @@ import SwiftUI
 struct MapKit_SwiftUIApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            SearchableMapView { result in
+                print("Selected result: \(result)") 
+            }
         }
     }
 }
