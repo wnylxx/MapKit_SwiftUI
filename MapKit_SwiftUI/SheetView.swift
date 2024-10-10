@@ -11,12 +11,19 @@ struct SheetView: View {
     @State private var locationService = LocationService(completer: .init())
     @State private var search: String = ""
     
+    @Binding var searchResults: [SearchResult]
+    
     var body: some View {
         VStack{
             HStack{
                 Image(systemName: "magnifyingglass")
                 TextField("Search for a restaurant", text: $search)
                     .autocorrectionDisabled()
+                    .onSubmit {
+                        Task {
+                            searchResults = (try? await locationService.search(with: search)) ?? []
+                        }
+                    }
             }
             .modifier(TextFieldGrayBackgroundColor())
             
@@ -24,7 +31,7 @@ struct SheetView: View {
             
             List {
                 ForEach(locationService.completions) { completion in
-                    Button(action: {} ) {
+                    Button(action: {didTapOnCompletion(completion)} ) {
                         VStack(alignment: .leading, spacing: 4) {
                             Text(completion.title)
                                 .font(.headline)
@@ -57,7 +64,18 @@ struct SheetView: View {
         
     }
     
+    private func didTapOnCompletion(_ completion: SearchCompletions) {
+        Task {
+            if let singleLocation = try? await locationService.search(with: "\(completion.title) \(completion.subTitle)").first {
+                searchResults = [singleLocation]
+            }
+        }
+    }
 }
+
+
+
+
 
 
 struct TextFieldGrayBackgroundColor: ViewModifier {
@@ -70,6 +88,6 @@ struct TextFieldGrayBackgroundColor: ViewModifier {
     }
 }
 
-#Preview {
-    SheetView()
-}
+//#Preview {
+//    SheetView()
+//}
