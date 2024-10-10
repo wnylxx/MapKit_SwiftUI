@@ -57,7 +57,7 @@ struct SheetView: View {
         .padding()
         // 아래로 내려서 dismiss 못하게 설정
         .interactiveDismissDisabled()
-        .presentationDetents([.height(200), .large])
+        .presentationDetents([.height(400), .large])
         // blur 효과 주기
         .presentationBackground(.regularMaterial)
         .presentationBackgroundInteraction(.enabled(upThrough: .large))

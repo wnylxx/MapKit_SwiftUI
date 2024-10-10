@@ -15,27 +15,51 @@ struct ContentView: View {
     @State private var searchResults = [SearchResult]()
     @State private var selectedLocation: SearchResult?
     
+    private let searchTitle = "검색어를 입력하세요."
+    
+    
     var body: some View {
-        Map(position: $position, selection: $selectedLocation) {
-            ForEach(searchResults) { result in
-                Marker(coordinate: result.location) {
-                    Image(systemName: "mappin")
+        ZStack{
+            Map(position: $position, selection: $selectedLocation) {
+                ForEach(searchResults) { result in
+                    Marker(coordinate: result.location) {
+                        Image(systemName: "mappin")
+                    }
+                    .tag(result)
                 }
-                .tag(result)
             }
-        }
-        .ignoresSafeArea()
-        .onChange(of: selectedLocation) {
-            isSheetPresented = (selectedLocation == nil)
-        }
-        .onChange(of: searchResults) {
-            if let firstResult = searchResults.first, searchResults.count == 1 {
-                selectedLocation = firstResult
+            .ignoresSafeArea()
+            .onChange(of: selectedLocation) {
+                isSheetPresented = (selectedLocation == nil)
             }
-        }
-        
-        .sheet(isPresented: $isSheetPresented) {
-            SheetView(searchResults: $searchResults)
+            .onChange(of: searchResults) {
+                if let firstResult = searchResults.first, searchResults.count == 1 {
+                    selectedLocation = firstResult
+                }
+            }
+            
+            .sheet(isPresented: $isSheetPresented) {
+                SheetView(searchResults: $searchResults)
+            }
+            
+            VStack{
+                HStack {
+                    Image(systemName: "magnifyingglass")
+                        .foregroundStyle(Color.gray)
+                        .padding()
+                    Text("\(searchTitle)")
+                        .foregroundStyle(Color.gray)
+                        .onTapGesture {
+                            isSheetPresented = true
+                        }
+                    Spacer()
+                }
+                .frame(maxWidth: .infinity)
+                .background(Color.white)
+                .cornerRadius(8)
+                Spacer()
+            }
+            .padding()
         }
     }
 }
