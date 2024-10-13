@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		18305C4C2CBBE0C500793601 /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18305C4B2CBBE0C500793601 /* MapViewModel.swift */; };
 		18E4E53F2CB6AE69002CA0E8 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18E4E5382CB6AE69002CA0E8 /* Preview Assets.xcassets */; };
 		18E4E5402CB6AE69002CA0E8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18E4E53A2CB6AE69002CA0E8 /* Assets.xcassets */; };
 		18E4E5422CB6AE69002CA0E8 /* MapKit_SwiftUIApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E4E53C2CB6AE69002CA0E8 /* MapKit_SwiftUIApp.swift */; };
@@ -16,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		18305C4B2CBBE0C500793601 /* MapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModel.swift; sourceTree = "<group>"; };
 		1866F37A2CB6A49A00816C78 /* MapKit_SwiftUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MapKit_SwiftUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		18E4E5382CB6AE69002CA0E8 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		18E4E53A2CB6AE69002CA0E8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -69,6 +71,7 @@
 				18E4E5442CB6B3C3002CA0E8 /* LocationService.swift */,
 				18E4E53D2CB6AE69002CA0E8 /* SheetView.swift */,
 				18F123502CB81E72009E0EEC /* ContentView.swift */,
+				18305C4B2CBBE0C500793601 /* MapViewModel.swift */,
 			);
 			path = MapKit_SwiftUI;
 			sourceTree = "<group>";
@@ -147,6 +150,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				18F123512CB81E72009E0EEC /* ContentView.swift in Sources */,
+				18305C4C2CBBE0C500793601 /* MapViewModel.swift in Sources */,
 				18E4E5422CB6AE69002CA0E8 /* MapKit_SwiftUIApp.swift in Sources */,
 				18E4E5452CB6B3C3002CA0E8 /* LocationService.swift in Sources */,
 				18E4E5432CB6AE69002CA0E8 /* SheetView.swift in Sources */,
