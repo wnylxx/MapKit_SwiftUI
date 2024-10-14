@@ -9,8 +9,11 @@ import SwiftUI
 import MapKit
 
 struct ContentView: View {
-    @State private var position = MapCameraPosition.automatic
-    @State private var isSheetPresented: Bool = false
+    
+    let locationManager = CLLocationManager()
+    @State private var position: MapCameraPosition = .userLocation(fallback: .automatic)
+    
+    @State private var isSheetPresented: Bool = true
     
     @State private var searchResults = [SearchResult]()
     @State private var selectedLocation: SearchResult?
@@ -21,6 +24,7 @@ struct ContentView: View {
     var body: some View {
         ZStack{
             Map(position: $position, selection: $selectedLocation) {
+                UserAnnotation()
                 ForEach(searchResults) { result in
                     Marker(coordinate: result.location) {
                         Image(systemName: "mappin")
@@ -29,6 +33,9 @@ struct ContentView: View {
                 }
             }
             .ignoresSafeArea()
+            .onAppear {
+                
+            }
             .onChange(of: selectedLocation) {
                 isSheetPresented = (selectedLocation == nil)
             }
@@ -41,25 +48,6 @@ struct ContentView: View {
             .sheet(isPresented: $isSheetPresented) {
                 SheetView(searchResults: $searchResults)
             }
-            
-            VStack{
-                HStack {
-                    Image(systemName: "magnifyingglass")
-                        .foregroundStyle(Color.gray)
-                        .padding()
-                    Text("\(searchTitle)")
-                        .foregroundStyle(Color.gray)
-                        .onTapGesture {
-                            isSheetPresented = true
-                        }
-                    Spacer()
-                }
-                .frame(maxWidth: .infinity)
-                .background(Color.white)
-                .cornerRadius(8)
-                Spacer()
-            }
-            .padding()
         }
     }
 }
