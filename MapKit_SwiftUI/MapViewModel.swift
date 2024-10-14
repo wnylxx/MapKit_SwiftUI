@@ -10,8 +10,8 @@ import SwiftUI
 import MapKit
 
 
-class MapViewModel: NSObject, CLLocationManagerDelegate {
-    private var locationManager: CLLocationManager = CLLocationManager()
+class MapViewModel: NSObject, ObservableObject ,CLLocationManagerDelegate {
+    private let locationManager: CLLocationManager = CLLocationManager()
     
     var camaeraPosition: MapCameraPosition = .userLocation(fallback: .automatic)
     
@@ -19,10 +19,14 @@ class MapViewModel: NSObject, CLLocationManagerDelegate {
         super.init()
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
+        locationManager.desiredAccuracy = kCLLocationAccuracyKilometer
+        locationManager.startUpdatingLocation()
     }
     
-    func moveToCurrentLocation() {
-        self.camaeraPosition = .userLocation(fallback: .automatic)
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        guard let userLocation = locations.first else { return }
+        
+        self.camaeraPosition = .region(MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: userLocation.coordinate.latitude, longitude: userLocation.coordinate.longitude), span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)))
     }
     
 }

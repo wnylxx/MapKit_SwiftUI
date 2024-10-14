@@ -9,17 +9,20 @@ import SwiftUI
 import MapKit
 
 struct ContentView: View {
+    @StateObject private var viewModel = MapViewModel()
     @State private var isSheetPresented: Bool = true
     
     
     var body: some View {
-        ZStack{
-            Map() {
+        VStack{
+            Map(position: $viewModel.camaeraPosition, interactionModes: .all) {
+                UserAnnotation()
             }
+                
             .ignoresSafeArea()
             .sheet(isPresented: $isSheetPresented) { // sheet와 연동
-                                SheetView()
-                            }
+                SheetView()
+            }
             
         }
     }
