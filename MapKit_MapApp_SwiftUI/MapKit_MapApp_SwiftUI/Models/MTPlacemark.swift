@@ -23,4 +23,8 @@ class MTPlacemark {
         self.longitude = longitude
     }
     
+    var coordinate: CLLocationCoordinate2D {
+        .init(latitude: latitude, longitude: longitude)
+    }
+    
 }

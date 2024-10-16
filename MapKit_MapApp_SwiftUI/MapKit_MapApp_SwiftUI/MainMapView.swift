@@ -7,24 +7,32 @@
 
 import SwiftUI
 import MapKit
+import SwiftData
 
 struct MainMapView: View {
     @State private var cameraPosition: MapCameraPosition = .automatic
+    @Query private var destinations: [Destination]
+    @State private var destination: Destination?
     
     var body: some View {
         Map(position: $cameraPosition) {
-            Marker("My Home", coordinate: CLLocationCoordinate2D(latitude: 37.529917577563, longitude: 127.07609682971))
+            if let destination {
+                ForEach(destination.placemarks) { placemark in
+                    Marker(placemark.name, systemImage: "star", coordinate: placemark.coordinate)
+                }
+                .tint(.yellow)
+            }
         }
             .onAppear {
-                // 신자초 위도 37.529917577563 , 경도 127.07609682971
-                let myPosition = CLLocationCoordinate2D(latitude: 37.529917577563, longitude: 127.07609682971)
-                let mySpan = MKCoordinateSpan(latitudeDelta: 0.15, longitudeDelta: 0.15)
-                let myRegion = MKCoordinateRegion(center: myPosition, span: mySpan)
-                cameraPosition = .region(myRegion)
+                destination = destinations.first
+                if let region = destination?.region {
+                    cameraPosition = .region(region)
+                }
             }
     }
 }
 
 #Preview {
     MainMapView()
+        .modelContainer(Destination.preview)
 }
