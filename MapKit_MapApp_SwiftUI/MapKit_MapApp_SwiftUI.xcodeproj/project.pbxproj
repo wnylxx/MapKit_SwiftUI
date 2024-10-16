@@ -6,14 +6,25 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		18305C762CBFFF7100793601 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18305C702CBFFF7100793601 /* Preview Assets.xcassets */; };
+		18305C772CBFFF7100793601 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18305C722CBFFF7100793601 /* Assets.xcassets */; };
+		18305C782CBFFF7100793601 /* MainMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18305C732CBFFF7100793601 /* MainMapView.swift */; };
+		18305C792CBFFF7100793601 /* MapKit_MapApp_SwiftUIApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18305C742CBFFF7100793601 /* MapKit_MapApp_SwiftUIApp.swift */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		18305C562CBD595900793601 /* MapKit_MapApp_SwiftUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MapKit_MapApp_SwiftUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		18305C702CBFFF7100793601 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		18305C722CBFFF7100793601 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		18305C732CBFFF7100793601 /* MainMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMapView.swift; sourceTree = "<group>"; };
+		18305C742CBFFF7100793601 /* MapKit_MapApp_SwiftUIApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapKit_MapApp_SwiftUIApp.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		18305C582CBD595900793601 /* MapKit_MapApp_SwiftUI */ = {
+		18305C7A2CBFFF7700793601 /* Models */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = MapKit_MapApp_SwiftUI;
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -32,7 +43,7 @@
 		18305C4D2CBD595900793601 = {
 			isa = PBXGroup;
 			children = (
-				18305C582CBD595900793601 /* MapKit_MapApp_SwiftUI */,
+				18305C752CBFFF7100793601 /* MapKit_MapApp_SwiftUI */,
 				18305C572CBD595900793601 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -43,6 +54,26 @@
 				18305C562CBD595900793601 /* MapKit_MapApp_SwiftUI.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		18305C712CBFFF7100793601 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				18305C702CBFFF7100793601 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		18305C752CBFFF7100793601 /* MapKit_MapApp_SwiftUI */ = {
+			isa = PBXGroup;
+			children = (
+				18305C712CBFFF7100793601 /* Preview Content */,
+				18305C722CBFFF7100793601 /* Assets.xcassets */,
+				18305C742CBFFF7100793601 /* MapKit_MapApp_SwiftUIApp.swift */,
+				18305C732CBFFF7100793601 /* MainMapView.swift */,
+				18305C7A2CBFFF7700793601 /* Models */,
+			);
+			path = MapKit_MapApp_SwiftUI;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -61,7 +92,7 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				18305C582CBD595900793601 /* MapKit_MapApp_SwiftUI */,
+				18305C7A2CBFFF7700793601 /* Models */,
 			);
 			name = MapKit_MapApp_SwiftUI;
 			packageProductDependencies = (
@@ -109,6 +140,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18305C762CBFFF7100793601 /* Preview Assets.xcassets in Resources */,
+				18305C772CBFFF7100793601 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -119,6 +152,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18305C782CBFFF7100793601 /* MainMapView.swift in Sources */,
+				18305C792CBFFF7100793601 /* MapKit_MapApp_SwiftUIApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
