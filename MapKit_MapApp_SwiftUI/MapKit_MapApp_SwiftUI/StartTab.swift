@@ -11,10 +11,10 @@ struct StartTab: View {
     var body: some View {
         TabView {
             Group {
-                MainMapView()
-                    .tabItem {
-                        Label("TripMap", systemImage: "map")
-                    }
+//                MainMapView()
+//                    .tabItem {
+//                        Label("TripMap", systemImage: "map")
+//                    }
                 DestinationsListView()
                     .tabItem {
                         Label("Destination", systemImage: "globe.desk")

@@ -14,33 +14,39 @@ struct DestinationsListView: View {
     
     @State private var newDestination = false
     @State private var destinationName = ""
+    @State private var path = NavigationPath()
     
     var body: some View {
-        NavigationStack {
+        NavigationStack(path: $path) {
             Group {
                 if !destinations.isEmpty {
                     List(destinations) { destination in
-                        HStack {
-                            Image(systemName: "globe")
-                                .imageScale(.large)
-                                .foregroundStyle(.blue)
-                            VStack(alignment: .leading) {
-                                Text(destination.name)
-                                // 2개 이상일 경우 s가 붙음
-                                Text("^[\(destination.placemarks.count) location](inflect: true)")
-                                    .font(.caption)
-                                    .foregroundStyle(.secondary)
+                        NavigationLink(value: destination) {
+                            HStack {
+                                Image(systemName: "globe")
+                                    .imageScale(.large)
+                                    .foregroundStyle(.blue)
+                                VStack(alignment: .leading) {
+                                    Text(destination.name)
+                                    // 2개 이상일 경우 s가 붙음
+                                    Text("^[\(destination.placemarks.count) location](inflect: true)")
+                                        .font(.caption)
+                                        .foregroundStyle(.secondary)
+                                }
                             }
-                        }
-                        .swipeActions(edge: .trailing) {
-                            Button(role: .destructive) {
-                                modelContext.delete(destination)
-                            } label: {
-                                Label("Delete", systemImage: "trash")
+                            .swipeActions(edge: .trailing) {
+                                Button(role: .destructive) {
+                                    modelContext.delete(destination)
+                                } label: {
+                                    Label("Delete", systemImage: "trash")
+                                }
                             }
                         }
                     }
-                    
+                    .navigationDestination(for: Destination.self) { destination in
+                        MainMapView(destination: destination)
+                        
+                    }
                 } else {
                     ContentUnavailableView("No Destination",
                                            systemImage: "globe.desk",
@@ -62,6 +68,7 @@ struct DestinationsListView: View {
                             let destination = Destination(name: destinationName)
                             modelContext.insert(destination)
                             destinationName = ""
+                            path.append(destination)
                         }
                     }
                     
