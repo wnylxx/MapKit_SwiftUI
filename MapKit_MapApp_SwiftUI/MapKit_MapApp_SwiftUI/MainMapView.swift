@@ -15,6 +15,10 @@ struct MainMapView: View {
     var destination: Destination
     
     var body: some View {
+        VStack {
+            
+        }
+        .padding()
         Map(position: $cameraPosition) {
             ForEach(destination.placemarks) { placemark in
                 Marker(placemark.name, systemImage: "star", coordinate: placemark.coordinate)
@@ -22,6 +26,8 @@ struct MainMapView: View {
             .tint(.yellow)
             
         }
+        .navigationTitle("Destination")
+        .navigationBarTitleDisplayMode(.inline)
         .onAppear {
             if let region = destination.region {
                 cameraPosition = .region(region)
@@ -35,5 +41,7 @@ struct MainMapView: View {
     let container = Destination.preview
     let fetchDescriptor = FetchDescriptor<Destination>()
     let destination = try! container.mainContext.fetch(fetchDescriptor)[0]
-    return MainMapView(destination: destination)
+    return NavigationStack {
+        MainMapView(destination: destination)
+    }
 }
