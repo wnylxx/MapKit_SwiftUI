@@ -12,7 +12,7 @@ import SwiftData
 struct MapKit_MapApp_SwiftUIApp: App {
     var body: some Scene {
         WindowGroup {
-            MainMapView()
+            StartTab()
         }
         .modelContainer(for: Destination.self)
     }
