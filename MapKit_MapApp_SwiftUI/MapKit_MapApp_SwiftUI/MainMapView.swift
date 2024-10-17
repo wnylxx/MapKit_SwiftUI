@@ -11,28 +11,29 @@ import SwiftData
 
 struct MainMapView: View {
     @State private var cameraPosition: MapCameraPosition = .automatic
-    @Query private var destinations: [Destination]
-    @State private var destination: Destination?
+    
+    var destination: Destination
     
     var body: some View {
         Map(position: $cameraPosition) {
-            if let destination {
-                ForEach(destination.placemarks) { placemark in
-                    Marker(placemark.name, systemImage: "star", coordinate: placemark.coordinate)
-                }
-                .tint(.yellow)
+            ForEach(destination.placemarks) { placemark in
+                Marker(placemark.name, systemImage: "star", coordinate: placemark.coordinate)
+            }
+            .tint(.yellow)
+            
+        }
+        .onAppear {
+            if let region = destination.region {
+                cameraPosition = .region(region)
             }
         }
-            .onAppear {
-                destination = destinations.first
-                if let region = destination?.region {
-                    cameraPosition = .region(region)
-                }
-            }
     }
 }
 
 #Preview {
-    MainMapView()
-        .modelContainer(Destination.preview)
+    // Query 사용하지말고 접근하기
+    let container = Destination.preview
+    let fetchDescriptor = FetchDescriptor<Destination>()
+    let destination = try! container.mainContext.fetch(fetchDescriptor)[0]
+    return MainMapView(destination: destination)
 }

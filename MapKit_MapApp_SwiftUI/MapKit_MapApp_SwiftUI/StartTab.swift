@@ -20,10 +20,14 @@ struct StartTab: View {
                         Label("Destination", systemImage: "globe.desk")
                     }
             }
+            .toolbarBackground(.blue.opacity(0.8), for: .tabBar)
+            .toolbarBackground(.visible, for: .tabBar)
+            .toolbarColorScheme(.dark, for: .tabBar)
         }
     }
 }
 
 #Preview {
     StartTab()
+        .modelContainer(Destination.preview)
 }
