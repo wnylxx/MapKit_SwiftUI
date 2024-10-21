@@ -36,6 +36,11 @@
 			path = Service;
 			sourceTree = "<group>";
 		};
+		18F357292CC69B760045F840 /* SharedView */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = SharedView;
+			sourceTree = "<group>";
+		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +87,7 @@
 				1816454F2CC1549900CCDAAC /* StartTab.swift */,
 				18305C732CBFFF7100793601 /* MainMapView.swift */,
 				1816454D2CC153B200CCDAAC /* DestinationsListView.swift */,
+				18F357292CC69B760045F840 /* SharedView */,
 				187F5A682CC686AC00A1EAA3 /* Service */,
 				18305C7A2CBFFF7700793601 /* Models */,
 			);
@@ -106,6 +112,7 @@
 			fileSystemSynchronizedGroups = (
 				18305C7A2CBFFF7700793601 /* Models */,
 				187F5A682CC686AC00A1EAA3 /* Service */,
+				18F357292CC69B760045F840 /* SharedView */,
 			);
 			name = MapKit_MapApp_SwiftUI;
 			packageProductDependencies = (

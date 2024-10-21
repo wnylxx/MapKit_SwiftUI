@@ -21,6 +21,7 @@ struct MainMapView: View {
     }
     
     var destination: Destination
+    @State private var selectedPlacemark: MTPlacemark?
     
     var body: some View {
         @Bindable var destination = destination
@@ -46,17 +47,24 @@ struct MainMapView: View {
             }
         }
         .padding()
-        Map(position: $cameraPosition) {
+        Map(position: $cameraPosition, selection: $selectedPlacemark) {
             ForEach(listPlacemarks) { placemark in
-                
-                if placemark.destination != nil {
-                    Marker(placemark.name, systemImage: "star", coordinate: placemark.coordinate)
-                        .tint(.yellow)
-                } else {
-                    Marker(placemark.name, coordinate: placemark.coordinate)
-                }
+                Group{
+                    if placemark.destination != nil {
+                        Marker(placemark.name, systemImage: "star", coordinate: placemark.coordinate)
+                            .tint(.yellow)
+                    } else {
+                        Marker(placemark.name, coordinate: placemark.coordinate)
+                    }
+                }.tag(placemark)
             }
-            
+        }
+        .sheet(item: $selectedPlacemark) { selectedPlacemark in
+            LocationDetialView(
+                destination: destination,
+                selectedPlacemark: selectedPlacemark
+            )
+                .presentationDetents([.height(450)])
         }
         .safeAreaInset(edge: .bottom) {
             HStack {
@@ -123,8 +131,8 @@ struct MainMapView: View {
     let container = Destination.preview
     let fetchDescriptor = FetchDescriptor<Destination>()
     let destination = try! container.mainContext.fetch(fetchDescriptor)[0]
-    return NavigationStack {
-        MainMapView(destination: destination)
-    }
-    .modelContainer(Destination.preview)
+    return MainMapView(destination: destination)
+//        .modelContainer(Destination.preview)
+    
+    
 }
