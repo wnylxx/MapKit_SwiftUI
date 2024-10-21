@@ -31,6 +31,11 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		187F5A682CC686AC00A1EAA3 /* Service */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Service;
+			sourceTree = "<group>";
+		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +82,7 @@
 				1816454F2CC1549900CCDAAC /* StartTab.swift */,
 				18305C732CBFFF7100793601 /* MainMapView.swift */,
 				1816454D2CC153B200CCDAAC /* DestinationsListView.swift */,
+				187F5A682CC686AC00A1EAA3 /* Service */,
 				18305C7A2CBFFF7700793601 /* Models */,
 			);
 			path = MapKit_MapApp_SwiftUI;
@@ -99,6 +105,7 @@
 			);
 			fileSystemSynchronizedGroups = (
 				18305C7A2CBFFF7700793601 /* Models */,
+				187F5A682CC686AC00A1EAA3 /* Service */,
 			);
 			name = MapKit_MapApp_SwiftUI;
 			packageProductDependencies = (

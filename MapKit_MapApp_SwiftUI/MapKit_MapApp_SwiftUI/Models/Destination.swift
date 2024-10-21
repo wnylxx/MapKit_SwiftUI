@@ -10,6 +10,7 @@ import MapKit
 
 @Model
 class Destination {
+    var id: UUID
     var name: String
     var latitude: Double?
     var longitude: Double?
@@ -19,6 +20,7 @@ class Destination {
     var placemarks: [MTPlacemark] = []
     
     init(name: String, latitude: Double? = nil, longitude: Double? = nil, latitudeDelta: Double? = nil, longitudeDelta: Double? = nil) {
+        self.id = UUID()
         self.name = name
         self.latitude = latitude
         self.longitude = longitude
