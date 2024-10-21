@@ -62,6 +62,8 @@ struct MainMapView: View {
             HStack {
                 TextField("Search...", text: $searchText)
                     .textFieldStyle(.roundedBorder)
+                    .autocorrectionDisabled()
+                    .textInputAutocapitalization(.never)
                     .focused($searchFieldFocus)
                     .overlay(alignment: .trailing){
                         if searchFieldFocus {
@@ -82,6 +84,7 @@ struct MainMapView: View {
                                 visibleRegion: visibleRegion
                             )
                             searchText = ""
+                            cameraPosition = .automatic
                         }
                     }
                 if !searchPlacemarks.isEmpty {
@@ -119,16 +122,9 @@ struct MainMapView: View {
 #Preview {
     let container = Destination.preview
     let fetchDescriptor = FetchDescriptor<Destination>()
-    
-    // 컨텍스트가 리셋되지 않았는지 확인 후, 안전하게 데이터를 가져오기
-    if let destination = try? container.mainContext.fetch(fetchDescriptor)[0] {
-        return NavigationStack {
-            MainMapView(destination: destination)
-        }
-        .modelContainer(Destination.preview)
-    } else {
-        // 데이터가 없을 때나 오류가 발생할 경우에 대한 대처
-        return Text("No destination available for preview.")
+    let destination = try! container.mainContext.fetch(fetchDescriptor)[0]
+    return NavigationStack {
+        MainMapView(destination: destination)
     }
-    
+    .modelContainer(Destination.preview)
 }

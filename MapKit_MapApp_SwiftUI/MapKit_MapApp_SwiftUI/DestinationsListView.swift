@@ -62,10 +62,10 @@ struct DestinationsListView: View {
                 }
                 .alert("Enter New Destination Name", isPresented: $newDestination) {
                     TextField("Enter New Destination Name", text: $destinationName)
-                    
+                        .autocorrectionDisabled()
                     Button("OK") {
                         if !destinationName.isEmpty {
-                            let destination = Destination(name: destinationName)
+                            let destination = Destination(name: destinationName.trimmingCharacters(in: .whitespacesAndNewlines))
                             modelContext.insert(destination)
                             destinationName = ""
                             path.append(destination)
