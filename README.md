@@ -4,6 +4,7 @@
 3. Annotation 찍기: Marker 사용 ( iOS 17 + )
 4. Polyline으로 경로 표시
 
+5. LookAroundPreview <- 한국에서 안되는 듯..?
 ### 기술스텍
 - SwiftUI
 - MVVM
