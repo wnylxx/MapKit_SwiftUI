@@ -60,7 +60,7 @@ struct MainMapView: View {
             }
         }
         .sheet(item: $selectedPlacemark) { selectedPlacemark in
-            LocationDetialView(
+            LocationDetailView(
                 destination: destination,
                 selectedPlacemark: selectedPlacemark
             )

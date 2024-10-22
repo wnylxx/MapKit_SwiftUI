@@ -35,8 +35,13 @@ struct TripMapView: View {
                         Marker(placemark.name, coordinate: placemark.coordinate)
                     }
                 }.tag(placemark)
-                
             }
+        }
+        .sheet(item: $selectedPlacemark) { selectedPlacemark in
+            LocationDetailView(
+                selectedPlacemark: selectedPlacemark
+            )
+                .presentationDetents([.height(450)])
         }
         .onMapCameraChange { context in
             visibleRegion = context.region
@@ -48,35 +53,50 @@ struct TripMapView: View {
             MapUserLocationButton()
         }
         .safeAreaInset(edge: .bottom) {
-            VStack {
-                TextField("Search...", text: $searchText)
-                    .textFieldStyle(.roundedBorder)
-                    .autocorrectionDisabled()
-                    .textInputAutocapitalization(.never)
-                    .focused($searchFieldFocus)
-                    .overlay(alignment: .trailing){
-                        if searchFieldFocus {
-                            Button {
-                                searchText = ""
-                                searchFieldFocus = false
-                            } label: {
-                                Image(systemName: "xmark.circle.fill")
+            HStack {
+                VStack {
+                    TextField("Search...", text: $searchText)
+                        .textFieldStyle(.roundedBorder)
+                        .autocorrectionDisabled()
+                        .textInputAutocapitalization(.never)
+                        .focused($searchFieldFocus)
+                        .overlay(alignment: .trailing){
+                            if searchFieldFocus {
+                                Button {
+                                    searchText = ""
+                                    searchFieldFocus = false
+                                } label: {
+                                    Image(systemName: "xmark.circle.fill")
+                                }
+                                .offset(x: -5)
                             }
-                            .offset(x: -5)
                         }
-                    }
-                    .onSubmit {
-                        Task {
-                            await MapManager.searchPlaces(
-                                modelContext,
-                                searchText: searchText,
-                                visibleRegion: visibleRegion
-                            )
-                            searchText = ""
+                        .onSubmit {
+                            Task {
+                                await MapManager.searchPlaces(
+                                    modelContext,
+                                    searchText: searchText,
+                                    visibleRegion: visibleRegion
+                                )
+                                searchText = ""
+                            }
                         }
+                }
+                .padding()
+                VStack {
+                    if !searchPlacemarks.isEmpty {
+                        Button {
+                            MapManager.removeSearchResults(modelContext)
+                        } label: {
+                            Image(systemName: "mappin.slash")
+                        }
+                        .buttonStyle(.borderedProminent)
+                        .tint(.red)
                     }
+                }
+                .padding()
+                .buttonBorderShape(.circle)
             }
-            .padding()
         }
     }
     
