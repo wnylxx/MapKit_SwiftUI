@@ -6,13 +6,26 @@
 //
 
 import SwiftUI
+import SwiftData
 import MapKit
 
 struct TripMapView: View {
     let manager = CLLocationManager()
+    @State private var cameraPosition: MapCameraPosition = .userLocation(fallback: .automatic)
+    @Query private var listPlacemark: [MTPlacemark]
     var body: some View {
-        Map() {
+        Map(position: $cameraPosition) {
             UserAnnotation()
+            ForEach(listPlacemark) {placemark in
+                Marker(coordinate: placemark.coordinate) {
+                    Label(placemark.name, systemImage: "star")
+                }
+                .tint(.yellow)
+                
+            }
+        }
+        .mapControls {
+            MapUserLocationButton()
         }
         .onAppear {
             manager.requestAlwaysAuthorization()
@@ -20,6 +33,6 @@ struct TripMapView: View {
     }
 }
 
-//#Preview {
-//    TripMapView()
-//}
+#Preview {
+    TripMapView()
+}
