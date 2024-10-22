@@ -127,12 +127,12 @@ struct MainMapView: View {
     }
 }
 
-#Preview {
-    let container = Destination.preview
-    let fetchDescriptor = FetchDescriptor<Destination>()
-    let destination = try! container.mainContext.fetch(fetchDescriptor)[0]
-    return MainMapView(destination: destination)
-//        .modelContainer(Destination.preview)
-    
-    
-}
+//#Preview {
+//    let container = Destination.preview
+//    let fetchDescriptor = FetchDescriptor<Destination>()
+//    let destination = try! container.mainContext.fetch(fetchDescriptor)[0]
+//    return MainMapView(destination: destination)
+////        .modelContainer(Destination.preview)
+//    
+//    
+//}
