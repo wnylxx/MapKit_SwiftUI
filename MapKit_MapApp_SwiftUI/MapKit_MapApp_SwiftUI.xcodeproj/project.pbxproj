@@ -36,6 +36,11 @@
 			path = Service;
 			sourceTree = "<group>";
 		};
+		18E9278E2CC7C86B005D6025 /* MyTripTab */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = MyTripTab;
+			sourceTree = "<group>";
+		};
 		18F357292CC69B760045F840 /* SharedView */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = SharedView;
@@ -87,6 +92,7 @@
 				1816454F2CC1549900CCDAAC /* StartTab.swift */,
 				18305C732CBFFF7100793601 /* MainMapView.swift */,
 				1816454D2CC153B200CCDAAC /* DestinationsListView.swift */,
+				18E9278E2CC7C86B005D6025 /* MyTripTab */,
 				18F357292CC69B760045F840 /* SharedView */,
 				187F5A682CC686AC00A1EAA3 /* Service */,
 				18305C7A2CBFFF7700793601 /* Models */,
@@ -112,6 +118,7 @@
 			fileSystemSynchronizedGroups = (
 				18305C7A2CBFFF7700793601 /* Models */,
 				187F5A682CC686AC00A1EAA3 /* Service */,
+				18E9278E2CC7C86B005D6025 /* MyTripTab */,
 				18F357292CC69B760045F840 /* SharedView */,
 			);
 			name = MapKit_MapApp_SwiftUI;
@@ -311,6 +318,8 @@
 				DEVELOPMENT_ASSET_PATHS = "\"MapKit_MapApp_SwiftUI/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "사용자의 위치를 상시, 앱 사용시 추적합니다.";
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "사용자의 위치를 상시 추적합니다.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -339,6 +348,8 @@
 				DEVELOPMENT_ASSET_PATHS = "\"MapKit_MapApp_SwiftUI/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "사용자의 위치를 상시, 앱 사용시 추적합니다.";
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "사용자의 위치를 상시 추적합니다.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

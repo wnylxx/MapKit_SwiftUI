@@ -11,6 +11,10 @@ struct StartTab: View {
     var body: some View {
         TabView {
             Group {
+                TripMapView()
+                    .tabItem {
+                        Label("Trip", systemImage: "airplane.departure" )
+                    }
 
                 DestinationsListView()
                     .tabItem {
