@@ -28,7 +28,7 @@ struct TripMapView: View {
             MapUserLocationButton()
         }
         .onAppear {
-            manager.requestAlwaysAuthorization()
+            manager.requestWhenInUseAuthorization()
         }
     }
 }
