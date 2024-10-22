@@ -79,7 +79,9 @@ struct TripMapView: View {
                                     visibleRegion: visibleRegion
                                 )
                                 searchText = ""
+                                
                             }
+                            print(searchPlacemarks)
                         }
                 }
                 .padding()
